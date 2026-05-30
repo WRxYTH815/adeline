@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#07070A"/>
+  <!-- Green glow layer -->
+  <rect width="32" height="32" rx="6" fill="none" stroke="#22c55e" stroke-width="0.5" opacity="0.3"/>
+  <!-- Geometric A mark -->
+  <!-- Left stroke -->
+  <polygon points="5,27 10,5 13,5 8,27" fill="#22c55e"/>
+  <!-- Right stroke -->
+  <polygon points="27,27 22,5 19,5 24,27" fill="#22c55e"/>
+  <!-- Crossbar -->
+  <rect x="9.5" y="16" width="13" height="2.8" fill="#22c55e"/>
+  <!-- Subtle inner glow on crossbar -->
+  <rect x="9.5" y="16" width="13" height="2.8" fill="#22c55e" opacity="0.3" filter="url(#glow)"/>
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
