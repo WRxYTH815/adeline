@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADELINE | Sovereign Cognitive Systems</title>
+    <title>ADELINE | Africa's Foundation Model Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -162,6 +162,18 @@
         }
         .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: #9ca3af; }
 
+        .partner-card {
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            border-radius: 0.5rem;
+            transition: border-color 250ms ease, box-shadow 250ms ease;
+            cursor: default;
+        }
+        .partner-card.compute { border-top: 2px solid rgba(34,197,94,0.4); }
+        .partner-card.research { border-top: 2px solid rgba(99,102,241,0.4); }
+        .partner-card.capital { border-top: 2px solid rgba(251,191,36,0.4); }
+        .partner-card:hover { box-shadow: 0 0 30px rgba(34,197,94,0.06); }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
@@ -175,9 +187,10 @@
             <a href="#hero" class="text-base font-bold tracking-widest text-white glow-text" style="text-decoration:none;">ADELINE</a>
             <div class="hidden sm:flex items-center gap-6">
                 <a href="#about" class="nav-link">ABOUT</a>
-                <a href="#systems" class="nav-link">SYSTEMS</a>
+                <a href="#systems" class="nav-link">ARCHITECTURE</a>
                 <a href="#problem" class="nav-link">PROBLEM</a>
                 <a href="#roadmap" class="nav-link">ROADMAP</a>
+                <a href="#partners" class="nav-link">PARTNERS</a>
                 <a href="#contact" class="nav-link">CONTACT</a>
             </div>
             <div class="flex items-center gap-2">
@@ -193,41 +206,47 @@
 
         <div class="w-full max-w-3xl mx-auto px-6 sm:px-12 py-24 space-y-10 relative z-10">
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
                 <span class="section-tag">// ADELINE_SYSTEMS_v0.1</span>
                 <span class="text-[10px] text-gray-600 tracking-widest">STEALTH_MODE</span>
+                <span class="text-[10px] text-gray-700 tracking-widest">//</span>
+                <span class="text-[10px] text-gray-600 tracking-widest">NAIROBI &rarr; CONTINENT</span>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-5">
                 <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none">
-                    Architecting Sovereign<br>
+                    Africa's<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500">
-                        Cognitive Systems
+                        Foundation Model
                     </span><br>
-                    <span class="text-white">for Africa.</span>
+                    <span class="text-white">built from scratch.</span>
                 </h1>
                 <p class="text-base sm:text-lg text-gray-400 max-w-xl leading-relaxed">
-                    We design local-first, emotionally aware AI architecture built to operate within constrained edge environments —
-                    bridging raw compute and human resonance. Rooted in Kenya. Built for the continent.
+                    Not a wrapper. Not a fine-tune. A custom cognitive architecture designed from the ground up —
+                    efficient on constrained compute, calibrated on African language and culture, owned entirely on African soil.
+                </p>
+                <p class="text-sm text-gray-600 max-w-lg leading-relaxed">
+                    DeepSeek proved frontier-competitive AI doesn't require a trillion-dollar lab. It requires the right architectural decisions.
+                    We are making those decisions for Africa.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="card p-5">
-                    <div class="section-tag mb-1">// EDGE OPTIMIZATION</div>
-                    <h3 class="text-white font-bold mb-2">Localized Inference</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Fine-tuning and quantizing small language models (SLMs) to execute efficiently on edge compute without cloud dependencies.</p>
+                    <div class="section-tag mb-1">// CUSTOM ARCHITECTURE</div>
+                    <h3 class="text-white font-bold mb-2">Built from the ground up</h3>
+                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Custom attention mechanism, MoE routing, and training pipeline — designed for constrained compute environments, not datacenter clusters.</p>
                 </div>
                 <div class="card p-5">
-                    <div class="section-tag mb-1">// MEMORY ARCHITECTURE</div>
-                    <h3 class="text-white font-bold mb-2">Persistent Identity</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Implementing persistent vector-space background thought loops that allow digital systems to retain contextual continuity.</p>
+                    <div class="section-tag mb-1">// DATA SOVEREIGNTY</div>
+                    <h3 class="text-white font-bold mb-2">African corpus. African ownership.</h3>
+                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Training data curated from East African language corpora — Swahili, Kikuyu, and beyond. The data is ours. The weights are ours.</p>
                 </div>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 items-start">
-                <a href="#contact" class="btn-primary glow-button">INITIATE CONNECTION</a>
-                <a href="#systems" class="btn-ghost">EXPLORE SYSTEMS</a>
+                <a href="#partners" class="btn-primary glow-button">BECOME A PARTNER</a>
+                <a href="#systems" class="btn-ghost">VIEW ARCHITECTURE</a>
             </div>
         </div>
 
@@ -248,34 +267,36 @@
                     <div>
                         <div class="section-tag mb-3">// WHO_WE_ARE</div>
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-                            AI sovereignty<br>is not optional.
+                            Africa doesn't need<br>access to AI.<br>
+                            <span class="text-green-400">It needs to own it.</span>
                         </h2>
                     </div>
                     <p class="text-gray-400 leading-relaxed">
-                        ADELINE is a sovereign cognitive systems lab. We build AI that lives where your data lives —
-                        on your hardware, in your language, under your control. No phone home. No foreign clouds. No dependency.
+                        ADELINE is a foundation model research lab. We are building a custom cognitive architecture —
+                        from attention mechanism to training pipeline to inference stack — designed specifically for the African context.
+                        No dependency on foreign model providers. No rental agreement with a US cloud.
                     </p>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Africa's next generation of AI infrastructure cannot be rented from overseas. It must be grown locally —
-                        fine-tuned on local language and culture, deployed on local compute, and owned by local institutions.
-                        We are building that stack from the ground up.
+                        DeepSeek changed the game in 2025 by proving that architectural innovation beats raw compute spend.
+                        A small, focused team with the right architectural decisions can produce a frontier-competitive model.
+                        We are applying that same principle to the most underserved AI market on earth.
                     </p>
                     <div class="space-y-3 pt-2">
                         <div class="flex items-start gap-3">
                             <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                            <span class="text-sm text-gray-400">Local-first deployment — zero cloud dependencies</span>
+                            <span class="text-sm text-gray-400">Custom architecture — not a fine-tune of someone else's model</span>
                         </div>
                         <div class="flex items-start gap-3">
                             <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                            <span class="text-sm text-gray-400">Privacy-preserving by architecture, not policy</span>
+                            <span class="text-sm text-gray-400">African language corpus — trained on data that reflects the continent</span>
                         </div>
                         <div class="flex items-start gap-3">
                             <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                            <span class="text-sm text-gray-400">Emotionally resonant — culturally calibrated systems</span>
+                            <span class="text-sm text-gray-400">Edge-first inference — runs on constrained hardware, not GPU farms</span>
                         </div>
                         <div class="flex items-start gap-3">
                             <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                            <span class="text-sm text-gray-400">Constrained-compute optimized for real infrastructure</span>
+                            <span class="text-sm text-gray-400">Fully sovereign — weights, data, and deployment owned on African soil</span>
                         </div>
                     </div>
                 </div>
@@ -284,14 +305,15 @@
                     <div class="scan-line" style="animation-duration:6s;"></div>
                     <div class="text-[10px] text-gray-600 tracking-widest mb-4">ADELINE_MANIFEST.txt</div>
                     <div class="space-y-3 text-sm">
-                        <p class="prompt text-gray-300">MISSION: Sovereign AI for the African continent.</p>
-                        <p class="prompt text-gray-400">STATUS: Pre-launch, stealth operations.</p>
+                        <p class="prompt text-gray-300">MISSION: Build Africa's foundation model architecture.</p>
+                        <p class="prompt text-gray-400">APPROACH: Custom architecture. Not a wrapper.</p>
+                        <p class="prompt text-gray-400">PROOF: DeepSeek showed it's possible. We go further.</p>
                         <p class="prompt text-gray-400">BASE: Dubai (DXB) &rarr; Nairobi (NBO)</p>
-                        <p class="prompt text-gray-400">STACK: SLM + Edge Inference + Memory Layer</p>
-                        <p class="prompt text-gray-400">CLOUD_DEPENDENCY: None.</p>
-                        <p class="prompt text-gray-400">SOVEREIGNTY: Default. Not optional.</p>
+                        <p class="prompt text-gray-400">TRAINING: Kaggle T4/TPU &rarr; compute grants &rarr; scale</p>
+                        <p class="prompt text-gray-400">CLOUD_DEPENDENCY: None. By design.</p>
+                        <p class="prompt text-gray-400">WEIGHTS_OWNERSHIP: African. Always.</p>
                         <div class="pt-3 border-t terminal-border mt-4">
-                            <p class="text-green-400 text-xs cursor-blink">SYSTEM OPERATIONAL</p>
+                            <p class="text-green-400 text-xs cursor-blink">ARCHITECTURE IN DEVELOPMENT</p>
                         </div>
                     </div>
                 </div>
@@ -302,18 +324,18 @@
 
     <hr class="section-divider">
 
-    <!-- CORE SYSTEMS -->
+    <!-- ARCHITECTURE -->
     <section id="systems" class="py-24 sm:py-32 grid-lines">
         <div class="max-w-5xl mx-auto px-6 sm:px-12">
 
             <div class="mb-12">
-                <div class="section-tag mb-3">// CORE_SYSTEMS</div>
+                <div class="section-tag mb-3">// ARCHITECTURE_LAYERS</div>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-2xl">
-                    Four pillars of <span class="text-green-400">sovereign</span> intelligence.
+                    Four layers. One <span class="text-green-400">sovereign</span> stack.
                 </h2>
                 <p class="text-gray-500 mt-4 max-w-xl text-sm leading-relaxed">
-                    Each system is a self-contained architectural layer. Stack them all or deploy individually —
-                    designed for real environments with real constraints.
+                    Every layer is purpose-built. Not adapted from existing models, not cloud-dependent —
+                    designed for the infrastructure realities of the African continent.
                 </p>
             </div>
 
@@ -321,72 +343,70 @@
 
                 <div class="card p-6 space-y-3">
                     <div class="flex items-center justify-between">
-                        <div class="section-tag">// EDGE OPTIMIZATION</div>
-                        <span class="badge badge-active">ACTIVE</span>
+                        <div class="section-tag">// LAYER 1: ATTENTION</div>
+                        <span class="badge badge-active">IN RESEARCH</span>
                     </div>
-                    <h3 class="text-white font-bold text-lg">Localized Inference</h3>
+                    <h3 class="text-white font-bold text-lg">Custom Attention Mechanism</h3>
                     <p class="text-sm text-gray-400 leading-relaxed">
-                        Fine-tuning and quantizing small language models — Phi, Gemma, LLaMA — to execute efficiently on
-                        edge compute. 4-bit quantized, sub-4GB VRAM deployments. No cloud required.
+                        Multi-head Latent Attention (MLA) variant designed for low-VRAM inference.
+                        Reduces KV cache overhead — enabling frontier-quality reasoning on sub-8GB hardware.
+                        Informed by DeepSeek's architecture innovations.
                     </p>
                     <div class="flex flex-wrap gap-2 pt-1">
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">GGUF</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ONNX</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">llama.cpp</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">4-bit quant</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">MLA</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">KV compression</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">low-VRAM</span>
                     </div>
                 </div>
 
                 <div class="card p-6 space-y-3">
                     <div class="flex items-center justify-between">
-                        <div class="section-tag">// MEMORY ARCHITECTURE</div>
-                        <span class="badge badge-active">ACTIVE</span>
+                        <div class="section-tag">// LAYER 2: ROUTING</div>
+                        <span class="badge badge-active">IN RESEARCH</span>
                     </div>
-                    <h3 class="text-white font-bold text-lg">Persistent Identity</h3>
+                    <h3 class="text-white font-bold text-lg">Mixture of Experts Routing</h3>
                     <p class="text-sm text-gray-400 leading-relaxed">
-                        Vector-space background thought loops that retain contextual continuity across sessions.
-                        Stateful AI that knows where it left off — and who it's talking to.
+                        Sparse MoE routing — large total parameter count, small active parameter count per inference.
+                        Scales capability without scaling compute requirements. Right for edge-first deployment.
                     </p>
                     <div class="flex flex-wrap gap-2 pt-1">
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ChromaDB</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">SQLite</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">sparse MoE</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">expert routing</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">load balancing</span>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="section-tag">// LAYER 3: DATA</div>
+                        <span class="badge badge-active">IN PROGRESS</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">African Language Corpus</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Curating a high-quality pre-training corpus from East African sources — Swahili, Kikuyu,
+                        and local English variants. Culturally calibrated. Owned entirely. Not licensed from a foreign provider.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">Swahili</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">Kikuyu</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">East African English</span>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="section-tag">// LAYER 4: MEMORY</div>
+                        <span class="badge badge-complete">BUILT</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">Persistent Cognitive State</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        GRU-based latent soul vector — 256-dim persistent subconscious state that survives across sessions.
+                        The model knows where it left off. Stateful identity, not stateless query-response.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-1">
                         <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">GRU latent</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">vector search</span>
-                    </div>
-                </div>
-
-                <div class="card p-6 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="section-tag">// EMOTIONAL RESONANCE</div>
-                        <span class="badge badge-next">IN DEV</span>
-                    </div>
-                    <h3 class="text-white font-bold text-lg">Affect-Aware Systems</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Models that read and adapt to human emotional context — not mimicking empathy, but architecturally
-                        wiring affective state into the inference loop. Culture-calibrated. Locally relevant.
-                    </p>
-                    <div class="flex flex-wrap gap-2 pt-1">
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">affect engine</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">mood tracking</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">tone modulation</span>
-                    </div>
-                </div>
-
-                <div class="card p-6 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="section-tag">// SOVEREIGN STACK</div>
-                        <span class="badge badge-planned">PLANNED</span>
-                    </div>
-                    <h3 class="text-white font-bold text-lg">Full Local Deployment</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        A complete stack — inference, memory, voice, and orchestration — that runs entirely on local hardware.
-                        Ship once. Runs forever. No subscription. No cloud. No exit.
-                    </p>
-                    <div class="flex flex-wrap gap-2 pt-1">
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">offline-first</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ARM-ready</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">Docker</span>
-                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">Raspberry Pi</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">256-dim vector</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ChromaDB</span>
                     </div>
                 </div>
 
@@ -434,12 +454,12 @@
                     <div class="problem-stat space-y-1">
                         <div class="section-tag">// LATENCY</div>
                         <h4 class="text-white font-bold mt-1">Round-trip tax</h4>
-                        <p class="text-sm text-gray-500 leading-relaxed">API calls to US-hosted models add 200–800ms per request. At scale, that's unusable for real-time applications on constrained connections.</p>
+                        <p class="text-sm text-gray-500 leading-relaxed">API calls to US-hosted models add 200–800ms per request. Unusable for real-time applications on constrained connections.</p>
                     </div>
                     <div class="problem-stat space-y-1">
                         <div class="section-tag">// PRIVACY</div>
                         <h4 class="text-white font-bold mt-1">Data leaves the continent</h4>
-                        <p class="text-sm text-gray-500 leading-relaxed">Every prompt sent to a foreign API crosses jurisdictional lines. Sensitive data — medical, legal, personal — is processed under foreign law with no meaningful recourse.</p>
+                        <p class="text-sm text-gray-500 leading-relaxed">Every prompt sent to a foreign API crosses jurisdictional lines. Medical, legal, and personal data processed under foreign law with no recourse.</p>
                     </div>
                 </div>
                 <div class="space-y-6">
@@ -460,8 +480,8 @@
                 <div class="scan-line" style="animation-duration:8s;"></div>
                 <div class="section-tag mb-3">// ADELINE_RESPONSE</div>
                 <p class="text-white text-lg sm:text-xl font-bold leading-relaxed max-w-2xl">
-                    "We do not solve this with a wrapper around GPT-4. We solve it by building sovereign cognitive infrastructure
-                    that runs entirely on African soil — efficient, persistent, culturally calibrated, privately owned."
+                    "We are not building a wrapper around GPT-4. We are building the architecture that Africa
+                    should have built a decade ago — from the attention heads up. Sovereign. Persistent. Ours."
                 </p>
             </div>
 
@@ -475,9 +495,9 @@
         <div class="max-w-5xl mx-auto px-6 sm:px-12">
 
             <div class="mb-12">
-                <div class="section-tag mb-3">// SYSTEM_ROADMAP</div>
+                <div class="section-tag mb-3">// BUILD_LOG</div>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">Build log.</h2>
-                <p class="text-gray-500 mt-3 text-sm">Phase-by-phase deployment of the sovereign stack.</p>
+                <p class="text-gray-500 mt-3 text-sm">From architecture research to a running sovereign model on African soil.</p>
             </div>
 
             <div class="max-w-2xl">
@@ -493,8 +513,8 @@
                                 <span class="badge badge-complete">COMPLETE</span>
                                 <span class="text-gray-600 text-[10px] tracking-widest">Q1 2026</span>
                             </div>
-                            <h4 class="text-white font-bold">Core Architecture Design</h4>
-                            <p class="text-sm text-gray-500">System architecture finalized. Memory subsystem, inference engine, and affect layer designed and documented.</p>
+                            <h4 class="text-white font-bold">Architecture Research &amp; Memory Layer</h4>
+                            <p class="text-sm text-gray-500">Core architecture decisions finalized. Persistent GRU-based latent state built and validated. MLA + MoE approach selected. Proof-of-concept running locally.</p>
                         </div>
                     </div>
 
@@ -506,8 +526,8 @@
                             <div class="flex items-center gap-3 flex-wrap">
                                 <span class="badge badge-active">ACTIVE &mdash; Q2 2026</span>
                             </div>
-                            <h4 class="text-white font-bold">Edge Inference Engine</h4>
-                            <p class="text-sm text-gray-500">Building and testing the localized inference stack. SLM quantization pipeline, local API layer, and initial deployment framework.</p>
+                            <h4 class="text-white font-bold">Training Pipeline &amp; Corpus Curation</h4>
+                            <p class="text-sm text-gray-500">Building the training pipeline on Kaggle T4/TPU infrastructure. Curating East African language corpus. First architecture ablations underway.</p>
                         </div>
                     </div>
 
@@ -519,8 +539,8 @@
                             <div class="flex items-center gap-3 flex-wrap">
                                 <span class="badge badge-next">NEXT &mdash; Q3 2026</span>
                             </div>
-                            <h4 class="text-white font-bold">First Deployment Partner, Kenya</h4>
-                            <p class="text-sm text-gray-500">Pilot deployment with a Nairobi-based organization. Real-world validation of the edge stack in constrained infrastructure conditions.</p>
+                            <h4 class="text-white font-bold">Compute Grant Acquisition &amp; Scale-Up</h4>
+                            <p class="text-sm text-gray-500">Leverage partnerships to access Google TPU Research Cloud, AWS Activate, and Oracle for Startups credits. Move from Kaggle prototyping to real training runs.</p>
                         </div>
                     </div>
 
@@ -532,8 +552,8 @@
                             <div class="flex items-center gap-3 flex-wrap">
                                 <span class="badge badge-planned">PLANNED &mdash; Q4 2026</span>
                             </div>
-                            <h4 class="text-white font-bold">Regional Expansion, East Africa</h4>
-                            <p class="text-sm text-gray-500">Expand the deployment framework to Tanzania, Uganda, and Rwanda. Build out regional inference node network.</p>
+                            <h4 class="text-white font-bold">First Model Release — Nairobi Pilot</h4>
+                            <p class="text-sm text-gray-500">First trained model deployed with a Nairobi-based partner organization. Real-world validation. Edge inference on local hardware. No cloud dependency.</p>
                         </div>
                     </div>
 
@@ -545,8 +565,8 @@
                             <div class="flex items-center gap-3 flex-wrap">
                                 <span class="badge badge-planned">PLANNED &mdash; 2027</span>
                             </div>
-                            <h4 class="text-white font-bold">Open-Source SDK Release</h4>
-                            <p class="text-sm text-gray-500">Public release of the sovereign deployment SDK — enabling any African developer or institution to deploy ADELINE-grade cognitive infrastructure independently.</p>
+                            <h4 class="text-white font-bold">Open-Source Architecture Release</h4>
+                            <p class="text-sm text-gray-500">Public release of the ADELINE architecture and training framework — enabling any African institution or developer to train and deploy sovereign cognitive systems independently.</p>
                         </div>
                     </div>
 
@@ -557,19 +577,162 @@
 
     <hr class="section-divider">
 
+    <!-- PARTNERS -->
+    <section id="partners" class="py-24 sm:py-32 noise-bg">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12">
+
+            <div class="mb-12 text-center">
+                <div class="section-tag mb-3">// PARTNER_WITH_ADELINE</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                    This doesn't get built without <span class="text-green-400">support.</span>
+                </h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+                    We are early stage and resource-constrained by design. DeepSeek trained a frontier model for ~$6M.
+                    We believe we can do it for less — but we need compute, data partnerships, and seed capital to get there.
+                    Here is exactly what we are looking for.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+
+                <div class="partner-card compute p-6 space-y-4">
+                    <div>
+                        <div class="section-tag mb-2" style="color: #22c55e;">// COMPUTE PARTNERS</div>
+                        <h3 class="text-white font-bold text-lg">GPU &amp; TPU Credits</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        We need cloud compute to train. Currently running on Kaggle T4/TPU (30hrs/week).
+                        Looking for partners who can provide significant compute credits to run real training runs.
+                    </p>
+                    <div class="space-y-2 pt-2">
+                        <div class="text-[10px] text-gray-600 tracking-widest">WHAT WE NEED</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-green-500"></span>
+                                Google TPU Research Cloud access
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-green-500"></span>
+                                AWS Activate / Azure for Startups credits
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-green-500"></span>
+                                Oracle Cloud Free Tier (infrastructure)
+                            </div>
+                        </div>
+                    </div>
+                    <a href="mailto:wrxyth815@outlook.com?subject=Compute Partnership — ADELINE" class="btn-primary w-full text-center block mt-2" style="padding: 0.6rem 1rem; font-size: 0.6rem;">
+                        DISCUSS COMPUTE PARTNERSHIP
+                    </a>
+                </div>
+
+                <div class="partner-card research p-6 space-y-4">
+                    <div>
+                        <div class="section-tag mb-2" style="color: #818cf8;">// RESEARCH PARTNERS</div>
+                        <h3 class="text-white font-bold text-lg">Data &amp; Academic</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        African language data is the core moat. We are looking for academic institutions,
+                        media organisations, and cultural bodies that can contribute high-quality corpus data
+                        in exchange for co-authorship and attribution.
+                    </p>
+                    <div class="space-y-2 pt-2">
+                        <div class="text-[10px] text-gray-600 tracking-widest">WHAT WE NEED</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                University of Nairobi / Strathmore partnerships
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                East African language dataset access
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                Research advisors in ML / NLP
+                            </div>
+                        </div>
+                    </div>
+                    <a href="mailto:wrxyth815@outlook.com?subject=Research Partnership — ADELINE" class="btn-primary w-full text-center block mt-2" style="padding: 0.6rem 1rem; font-size: 0.6rem; border-color: rgba(99,102,241,0.4); color: #818cf8;">
+                        DISCUSS RESEARCH PARTNERSHIP
+                    </a>
+                </div>
+
+                <div class="partner-card capital p-6 space-y-4">
+                    <div>
+                        <div class="section-tag mb-2" style="color: #fbbf24;">// SEED CAPITAL</div>
+                        <h3 class="text-white font-bold text-lg">Early Investors</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Pre-seed / seed round being structured. Looking for investors and accelerators who believe
+                        in the Africa AI sovereignty thesis and understand the long game. This is infrastructure,
+                        not a SaaS product.
+                    </p>
+                    <div class="space-y-2 pt-2">
+                        <div class="text-[10px] text-gray-600 tracking-widest">WHO WE WANT</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-yellow-400"></span>
+                                Africa-focused VCs and angels (Antler, Founders Factory Africa)
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-yellow-400"></span>
+                                Accelerators with compute + network (YC, GIZ)
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                                <span class="w-1 h-1 rounded-full bg-yellow-400"></span>
+                                Corporate strategics (Safaricom, Equity Bank)
+                            </div>
+                        </div>
+                    </div>
+                    <a href="mailto:wrxyth815@outlook.com?subject=Investment Discussion — ADELINE" class="btn-primary w-full text-center block mt-2" style="padding: 0.6rem 1rem; font-size: 0.6rem; border-color: rgba(251,191,36,0.4); color: #fbbf24;">
+                        DISCUSS INVESTMENT
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Why now callout -->
+            <div class="card p-8 relative overflow-hidden">
+                <div class="scan-line" style="animation-duration:7s;"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div class="space-y-2">
+                        <div class="section-tag">// WHY NOW</div>
+                        <h4 class="text-white font-bold">The window is open</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">DeepSeek proved in 2025 that architectural efficiency beats raw compute spend. That window is open for 2–3 years before it closes. Africa needs to move now.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="section-tag">// WHY US</div>
+                        <h4 class="text-white font-bold">We have proof of concept</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">The memory architecture is built and validated. Persistent latent state, affect-aware inference, edge-optimized pipeline. The foundations are real, not a pitch deck.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="section-tag">// WHY AFRICA</div>
+                        <h4 class="text-white font-bold">1.4 billion people. Zero models.</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">No major foundation model has been trained with African languages and culture as first-class citizens. The market is untouched. The need is urgent. The timing is right.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
     <!-- CONTACT -->
-    <section id="contact" class="py-24 sm:py-32 noise-bg">
+    <section id="contact" class="py-24 sm:py-32">
         <div class="max-w-3xl mx-auto px-6 sm:px-12 text-center space-y-10">
 
             <div>
                 <div class="section-tag mb-4 block">// INITIATE_CONNECTION</div>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-                    If you are building for Africa,<br>
-                    <span class="text-green-400">let's talk.</span>
+                    If you are serious about<br>
+                    <span class="text-green-400">African AI sovereignty,</span><br>
+                    reach out.
                 </h2>
                 <p class="text-gray-500 mt-5 max-w-lg mx-auto text-sm leading-relaxed">
-                    We are in stealth. We are selective. We work with institutions, enterprises, and researchers
-                    who are serious about AI sovereignty on the continent. If that is you, reach out.
+                    We are in stealth. We are selective. Compute partners, research collaborators, investors, and
+                    early deployment partners only. If that is you, one email is enough.
                 </p>
             </div>
 
@@ -588,7 +751,7 @@
                         <div class="text-[10px] text-gray-600 tracking-widest mb-1">STATUS</div>
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                            <span class="text-gray-400 text-sm">Accepting introductory conversations</span>
+                            <span class="text-gray-400 text-sm">Architecture in development. Partners welcome.</span>
                         </div>
                     </div>
                     <div class="border-t terminal-border pt-6">
@@ -596,21 +759,6 @@
                             INITIATE CONNECTION
                         </a>
                     </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-                <div class="space-y-1">
-                    <div class="section-tag text-[10px]">WE WORK WITH</div>
-                    <p class="text-gray-500 text-xs leading-relaxed">Institutions and enterprises building AI for African end-users</p>
-                </div>
-                <div class="space-y-1">
-                    <div class="section-tag text-[10px]">WE DO NOT</div>
-                    <p class="text-gray-500 text-xs leading-relaxed">Build wrappers around GPT-4. Sell SaaS subscriptions. Depend on foreign cloud</p>
-                </div>
-                <div class="space-y-1">
-                    <div class="section-tag text-[10px]">WE ARE</div>
-                    <p class="text-gray-500 text-xs leading-relaxed">Early stage. Highly technical. Selective with partnerships. Long-term focused</p>
                 </div>
             </div>
 
