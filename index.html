@@ -6,63 +6,629 @@
     <title>ADELINE | Sovereign Cognitive Systems</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #07070A; font-family: monospace; }
-        .glow-text { text-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
-        .glow-button { box-shadow: 0 0 20px rgba(34, 197, 94, 0.15); }
-        .terminal-border { border-color: rgba(255, 255, 255, 0.05); }
+        :root {
+            --green: #22c55e;
+            --green-dim: rgba(34, 197, 94, 0.15);
+            --green-glow: rgba(34, 197, 94, 0.4);
+            --border: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(13, 13, 19, 0.6);
+        }
+
+        * { scroll-behavior: smooth; }
+
+        body {
+            background-color: #07070A;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #07070A; }
+        ::-webkit-scrollbar-thumb { background: rgba(34, 197, 94, 0.3); border-radius: 2px; }
+
+        .glow-text { text-shadow: 0 0 15px var(--green-glow); }
+        .glow-button { box-shadow: 0 0 20px var(--green-dim); }
+        .glow-button:hover { box-shadow: 0 0 35px rgba(34, 197, 94, 0.3); }
+        .terminal-border { border-color: var(--border); }
+
+        .nav-fixed {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 50;
+            background: rgba(7, 7, 10, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-link {
+            color: #6b7280;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: color 200ms ease;
+            cursor: pointer;
+        }
+        .nav-link:hover { color: #22c55e; }
+
+        .card {
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 0.5rem;
+            transition: border-color 250ms ease, box-shadow 250ms ease;
+        }
+        .card:hover {
+            border-color: rgba(34, 197, 94, 0.15);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.05);
+        }
+
+        .noise-bg {
+            background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 197, 94, 0.06) 0%, transparent 60%);
+        }
+
+        .grid-lines {
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .section-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+        .roadmap-line {
+            position: absolute;
+            left: 11px; top: 24px; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, rgba(34,197,94,0.4), rgba(34,197,94,0.05));
+        }
+
+        .badge {
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+            padding: 2px 8px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+        .badge-complete { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+        .badge-active { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); animation: badge-pulse 2s ease-in-out infinite; }
+        .badge-next { background: rgba(99,102,241,0.12); color: #818cf8; border: 1px solid rgba(99,102,241,0.25); }
+        .badge-planned { background: rgba(255,255,255,0.04); color: #6b7280; border: 1px solid rgba(255,255,255,0.08); }
+
+        @keyframes badge-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #22c55e;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .prompt::before { content: '> '; color: #22c55e; opacity: 0.7; }
+
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(34,197,94,0.3), transparent);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scan { 0% { top: 0%; opacity: 1; } 90% { opacity: 0.5; } 100% { top: 100%; opacity: 0; } }
+
+        .cursor-blink::after { content: '_'; animation: blink 1s step-end infinite; color: #22c55e; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .section-tag { font-size: 0.6rem; letter-spacing: 0.2em; color: #22c55e; font-weight: 700; }
+
+        .problem-stat { border-left: 2px solid rgba(34,197,94,0.3); padding-left: 1rem; }
+
+        .btn-primary {
+            display: inline-block;
+            border: 1px solid rgba(34,197,94,0.4);
+            color: #22c55e;
+            background: transparent;
+            padding: 0.9rem 2rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #22c55e;
+            color: #000;
+            border-color: #22c55e;
+            box-shadow: 0 0 30px rgba(34,197,94,0.25);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #6b7280;
+            background: transparent;
+            padding: 0.9rem 2rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: #9ca3af; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
-<body class="text-gray-400 min-h-screen flex flex-col justify-between p-6 sm:p-12 selection:bg-green-500 selection:text-black">
+<body class="text-gray-400 selection:bg-green-500 selection:text-black">
 
-    <!-- Header -->
-    <header class="w-full max-w-5xl mx-auto flex justify-between items-center z-10">
-        <div class="text-xl font-bold tracking-widest text-white glow-text">ADELINE</div>
-        <div class="flex items-center gap-2 text-xs text-green-400">
-            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span class="tracking-widest">SYSTEM_INITIALIZED</span>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="w-full max-w-3xl mx-auto my-auto py-16 space-y-10 z-10">
-        <div class="space-y-4">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-none">
-                Architecting Sovereign <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500">
-                    Cognitive Systems
-                </span> for Africa.
-            </h1>
-            <p class="text-base sm:text-lg text-gray-400 max-w-xl leading-relaxed">
-                We design local-first, emotionally aware AI architecture built to operate within constrained edge environments. Bridging the gap between raw compute and human resonance, rooted in Kenya.
-            </p>
-        </div>
-
-        <!-- Technical Substrate Loop -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-            <div class="border terminal-border p-5 rounded-lg bg-[#0D0D13]/60 backdrop-blur-sm hover:border-gray-800 transition-colors">
-                <div class="text-xs text-green-400 mb-1 font-bold">// EDGE OPTIMIZATION</div>
-                <h3 class="text-white font-bold mb-2">Localized Inference</h3>
-                <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Fine-tuning and quantizing small language models (SLMs) to execute efficiently on edge compute without cloud dependencies.</p>
+    <!-- FIXED NAV -->
+    <nav class="nav-fixed">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12 h-14 flex justify-between items-center">
+            <a href="#hero" class="text-base font-bold tracking-widest text-white glow-text" style="text-decoration:none;">ADELINE</a>
+            <div class="hidden sm:flex items-center gap-6">
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#systems" class="nav-link">SYSTEMS</a>
+                <a href="#problem" class="nav-link">PROBLEM</a>
+                <a href="#roadmap" class="nav-link">ROADMAP</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
             </div>
-            <div class="border terminal-border p-5 rounded-lg bg-[#0D0D13]/60 backdrop-blur-sm hover:border-gray-800 transition-colors">
-                <div class="text-xs text-green-400 mb-1 font-bold">// MEMORY ARCHITECTURE</div>
-                <h3 class="text-white font-bold mb-2">Persistent Identity</h3>
-                <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Implementing persistent vector-space background thought loops that allow digital systems to retain contextual continuity.</p>
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-green-400 text-[10px] tracking-widest hidden sm:inline">SYSTEM_INITIALIZED</span>
             </div>
         </div>
+    </nav>
 
-        <!-- CTA -->
-        <div class="pt-2">
-            <a href="mailto:wrxyth815@outlook.com" class="inline-block bg-transparent border border-green-500/40 text-green-400 hover:border-green-400 hover:bg-green-500 hover:text-black transition-all px-8 py-3.5 rounded font-bold text-xs tracking-widest glow-button">
-                INITIATE CONNECTION
-            </a>
+    <!-- HERO -->
+    <section id="hero" class="noise-bg grid-lines relative min-h-screen flex flex-col justify-center pt-14 overflow-hidden">
+        <div class="scan-line"></div>
+
+        <div class="w-full max-w-3xl mx-auto px-6 sm:px-12 py-24 space-y-10 relative z-10">
+
+            <div class="flex items-center gap-3">
+                <span class="section-tag">// ADELINE_SYSTEMS_v0.1</span>
+                <span class="text-[10px] text-gray-600 tracking-widest">STEALTH_MODE</span>
+            </div>
+
+            <div class="space-y-4">
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none">
+                    Architecting Sovereign<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500">
+                        Cognitive Systems
+                    </span><br>
+                    <span class="text-white">for Africa.</span>
+                </h1>
+                <p class="text-base sm:text-lg text-gray-400 max-w-xl leading-relaxed">
+                    We design local-first, emotionally aware AI architecture built to operate within constrained edge environments —
+                    bridging raw compute and human resonance. Rooted in Kenya. Built for the continent.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="card p-5">
+                    <div class="section-tag mb-1">// EDGE OPTIMIZATION</div>
+                    <h3 class="text-white font-bold mb-2">Localized Inference</h3>
+                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Fine-tuning and quantizing small language models (SLMs) to execute efficiently on edge compute without cloud dependencies.</p>
+                </div>
+                <div class="card p-5">
+                    <div class="section-tag mb-1">// MEMORY ARCHITECTURE</div>
+                    <h3 class="text-white font-bold mb-2">Persistent Identity</h3>
+                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Implementing persistent vector-space background thought loops that allow digital systems to retain contextual continuity.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 items-start">
+                <a href="#contact" class="btn-primary glow-button">INITIATE CONNECTION</a>
+                <a href="#systems" class="btn-ghost">EXPLORE SYSTEMS</a>
+            </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="w-full max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center text-[10px] sm:text-xs text-gray-600 gap-4 pt-8 border-t terminal-border">
-        <div class="tracking-wider">&copy; 2026 ADELINE SYSTEMS. ALL RIGHTS RESERVED.</div>
-        <div class="tracking-widest text-gray-500">LOC: DXB // DEST: NBO // STATUS: STEALTH</div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-700">
+            <span class="text-[10px] tracking-widest">SCROLL</span>
+            <div class="w-px h-8 bg-gradient-to-b from-gray-700 to-transparent animate-pulse"></div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 sm:py-32">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <div class="space-y-6">
+                    <div>
+                        <div class="section-tag mb-3">// WHO_WE_ARE</div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                            AI sovereignty<br>is not optional.
+                        </h2>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        ADELINE is a sovereign cognitive systems lab. We build AI that lives where your data lives —
+                        on your hardware, in your language, under your control. No phone home. No foreign clouds. No dependency.
+                    </p>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Africa's next generation of AI infrastructure cannot be rented from overseas. It must be grown locally —
+                        fine-tuned on local language and culture, deployed on local compute, and owned by local institutions.
+                        We are building that stack from the ground up.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            <span class="text-sm text-gray-400">Local-first deployment — zero cloud dependencies</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            <span class="text-sm text-gray-400">Privacy-preserving by architecture, not policy</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            <span class="text-sm text-gray-400">Emotionally resonant — culturally calibrated systems</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-3 h-3 text-green-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            <span class="text-sm text-gray-400">Constrained-compute optimized for real infrastructure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6 relative overflow-hidden">
+                    <div class="scan-line" style="animation-duration:6s;"></div>
+                    <div class="text-[10px] text-gray-600 tracking-widest mb-4">ADELINE_MANIFEST.txt</div>
+                    <div class="space-y-3 text-sm">
+                        <p class="prompt text-gray-300">MISSION: Sovereign AI for the African continent.</p>
+                        <p class="prompt text-gray-400">STATUS: Pre-launch, stealth operations.</p>
+                        <p class="prompt text-gray-400">BASE: Dubai (DXB) &rarr; Nairobi (NBO)</p>
+                        <p class="prompt text-gray-400">STACK: SLM + Edge Inference + Memory Layer</p>
+                        <p class="prompt text-gray-400">CLOUD_DEPENDENCY: None.</p>
+                        <p class="prompt text-gray-400">SOVEREIGNTY: Default. Not optional.</p>
+                        <div class="pt-3 border-t terminal-border mt-4">
+                            <p class="text-green-400 text-xs cursor-blink">SYSTEM OPERATIONAL</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- CORE SYSTEMS -->
+    <section id="systems" class="py-24 sm:py-32 grid-lines">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12">
+
+            <div class="mb-12">
+                <div class="section-tag mb-3">// CORE_SYSTEMS</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-2xl">
+                    Four pillars of <span class="text-green-400">sovereign</span> intelligence.
+                </h2>
+                <p class="text-gray-500 mt-4 max-w-xl text-sm leading-relaxed">
+                    Each system is a self-contained architectural layer. Stack them all or deploy individually —
+                    designed for real environments with real constraints.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <div class="card p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="section-tag">// EDGE OPTIMIZATION</div>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">Localized Inference</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Fine-tuning and quantizing small language models — Phi, Gemma, LLaMA — to execute efficiently on
+                        edge compute. 4-bit quantized, sub-4GB VRAM deployments. No cloud required.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">GGUF</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ONNX</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">llama.cpp</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">4-bit quant</span>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="section-tag">// MEMORY ARCHITECTURE</div>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">Persistent Identity</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Vector-space background thought loops that retain contextual continuity across sessions.
+                        Stateful AI that knows where it left off — and who it's talking to.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ChromaDB</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">SQLite</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">GRU latent</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">vector search</span>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="section-tag">// EMOTIONAL RESONANCE</div>
+                        <span class="badge badge-next">IN DEV</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">Affect-Aware Systems</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Models that read and adapt to human emotional context — not mimicking empathy, but architecturally
+                        wiring affective state into the inference loop. Culture-calibrated. Locally relevant.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">affect engine</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">mood tracking</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">tone modulation</span>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="section-tag">// SOVEREIGN STACK</div>
+                        <span class="badge badge-planned">PLANNED</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">Full Local Deployment</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        A complete stack — inference, memory, voice, and orchestration — that runs entirely on local hardware.
+                        Ship once. Runs forever. No subscription. No cloud. No exit.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">offline-first</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">ARM-ready</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">Docker</span>
+                        <span class="text-[10px] text-gray-600 border terminal-border px-2 py-1 rounded">Raspberry Pi</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- THE PROBLEM -->
+    <section id="problem" class="py-24 sm:py-32">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12">
+
+            <div class="mb-12">
+                <div class="section-tag mb-3">// THE_PROBLEM</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-2xl">
+                    Africa's AI runs on<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+                        someone else's infrastructure.
+                    </span>
+                </h2>
+                <p class="text-gray-500 mt-4 max-w-xl text-sm leading-relaxed">
+                    Every inference call, every API hit, every AI assistant used in Kenya, Nigeria, or South Africa
+                    travels to a data center in Virginia or Oregon. That is not sovereignty. That is dependency with a product skin on it.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+                <div class="card p-6 text-center space-y-2">
+                    <div class="stat-number">95%</div>
+                    <p class="text-xs text-gray-500 leading-relaxed">of AI compute serving Africa is hosted outside the continent</p>
+                </div>
+                <div class="card p-6 text-center space-y-2">
+                    <div class="stat-number">4x</div>
+                    <p class="text-xs text-gray-500 leading-relaxed">average latency penalty for Sub-Saharan users vs. US-based users on cloud AI</p>
+                </div>
+                <div class="card p-6 text-center space-y-2">
+                    <div class="stat-number">0</div>
+                    <p class="text-xs text-gray-500 leading-relaxed">major foundation models trained primarily on East African language corpora</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
+                <div class="space-y-6">
+                    <div class="problem-stat space-y-1">
+                        <div class="section-tag">// LATENCY</div>
+                        <h4 class="text-white font-bold mt-1">Round-trip tax</h4>
+                        <p class="text-sm text-gray-500 leading-relaxed">API calls to US-hosted models add 200–800ms per request. At scale, that's unusable for real-time applications on constrained connections.</p>
+                    </div>
+                    <div class="problem-stat space-y-1">
+                        <div class="section-tag">// PRIVACY</div>
+                        <h4 class="text-white font-bold mt-1">Data leaves the continent</h4>
+                        <p class="text-sm text-gray-500 leading-relaxed">Every prompt sent to a foreign API crosses jurisdictional lines. Sensitive data — medical, legal, personal — is processed under foreign law with no meaningful recourse.</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="problem-stat space-y-1">
+                        <div class="section-tag">// CULTURE</div>
+                        <h4 class="text-white font-bold mt-1">Models trained on foreign context</h4>
+                        <p class="text-sm text-gray-500 leading-relaxed">Swahili, Hausa, Kikuyu, Zulu — undertrained, undertested, and ignored. Cultural nuance collapsed into generic "multilingual" support that misses the mark.</p>
+                    </div>
+                    <div class="problem-stat space-y-1">
+                        <div class="section-tag">// COST</div>
+                        <h4 class="text-white font-bold mt-1">API pricing is extractive</h4>
+                        <p class="text-sm text-gray-500 leading-relaxed">Pay-per-token at US purchasing power parity. For teams in Nairobi or Lagos, the cost of running AI is structurally prohibitive. Local inference eliminates that ceiling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-8 relative overflow-hidden">
+                <div class="scan-line" style="animation-duration:8s;"></div>
+                <div class="section-tag mb-3">// ADELINE_RESPONSE</div>
+                <p class="text-white text-lg sm:text-xl font-bold leading-relaxed max-w-2xl">
+                    "We do not solve this with a wrapper around GPT-4. We solve it by building sovereign cognitive infrastructure
+                    that runs entirely on African soil — efficient, persistent, culturally calibrated, privately owned."
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="py-24 sm:py-32 grid-lines">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12">
+
+            <div class="mb-12">
+                <div class="section-tag mb-3">// SYSTEM_ROADMAP</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">Build log.</h2>
+                <p class="text-gray-500 mt-3 text-sm">Phase-by-phase deployment of the sovereign stack.</p>
+            </div>
+
+            <div class="max-w-2xl">
+                <div class="relative pl-10 space-y-0">
+                    <div class="roadmap-line"></div>
+
+                    <div class="relative pb-8">
+                        <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="card p-5 space-y-2">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="badge badge-complete">COMPLETE</span>
+                                <span class="text-gray-600 text-[10px] tracking-widest">Q1 2026</span>
+                            </div>
+                            <h4 class="text-white font-bold">Core Architecture Design</h4>
+                            <p class="text-sm text-gray-500">System architecture finalized. Memory subsystem, inference engine, and affect layer designed and documented.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pb-8">
+                        <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-yellow-500/20 border border-yellow-500/50 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></div>
+                        </div>
+                        <div class="card p-5 space-y-2" style="border-color: rgba(251,191,36,0.15);">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="badge badge-active">ACTIVE &mdash; Q2 2026</span>
+                            </div>
+                            <h4 class="text-white font-bold">Edge Inference Engine</h4>
+                            <p class="text-sm text-gray-500">Building and testing the localized inference stack. SLM quantization pipeline, local API layer, and initial deployment framework.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pb-8">
+                        <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-indigo-400"></div>
+                        </div>
+                        <div class="card p-5 space-y-2">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="badge badge-next">NEXT &mdash; Q3 2026</span>
+                            </div>
+                            <h4 class="text-white font-bold">First Deployment Partner, Kenya</h4>
+                            <p class="text-sm text-gray-500">Pilot deployment with a Nairobi-based organization. Real-world validation of the edge stack in constrained infrastructure conditions.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pb-8">
+                        <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                        </div>
+                        <div class="card p-5 space-y-2">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="badge badge-planned">PLANNED &mdash; Q4 2026</span>
+                            </div>
+                            <h4 class="text-white font-bold">Regional Expansion, East Africa</h4>
+                            <p class="text-sm text-gray-500">Expand the deployment framework to Tanzania, Uganda, and Rwanda. Build out regional inference node network.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                        </div>
+                        <div class="card p-5 space-y-2">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="badge badge-planned">PLANNED &mdash; 2027</span>
+                            </div>
+                            <h4 class="text-white font-bold">Open-Source SDK Release</h4>
+                            <p class="text-sm text-gray-500">Public release of the sovereign deployment SDK — enabling any African developer or institution to deploy ADELINE-grade cognitive infrastructure independently.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 sm:py-32 noise-bg">
+        <div class="max-w-3xl mx-auto px-6 sm:px-12 text-center space-y-10">
+
+            <div>
+                <div class="section-tag mb-4 block">// INITIATE_CONNECTION</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                    If you are building for Africa,<br>
+                    <span class="text-green-400">let's talk.</span>
+                </h2>
+                <p class="text-gray-500 mt-5 max-w-lg mx-auto text-sm leading-relaxed">
+                    We are in stealth. We are selective. We work with institutions, enterprises, and researchers
+                    who are serious about AI sovereignty on the continent. If that is you, reach out.
+                </p>
+            </div>
+
+            <div class="card p-8 max-w-lg mx-auto relative overflow-hidden text-left">
+                <div class="scan-line" style="animation-duration:5s;"></div>
+                <div class="space-y-6">
+                    <div>
+                        <div class="text-[10px] text-gray-600 tracking-widest mb-1">SECURE CHANNEL</div>
+                        <p class="text-green-400 text-sm font-bold tracking-wide">wrxyth815@outlook.com</p>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gray-600 tracking-widest mb-1">LOCATION</div>
+                        <p class="text-gray-400 text-sm tracking-wide">Dubai, UAE &nbsp;&rarr;&nbsp; Nairobi, Kenya</p>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gray-600 tracking-widest mb-1">STATUS</div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                            <span class="text-gray-400 text-sm">Accepting introductory conversations</span>
+                        </div>
+                    </div>
+                    <div class="border-t terminal-border pt-6">
+                        <a href="mailto:wrxyth815@outlook.com" class="btn-primary glow-button w-full text-center block">
+                            INITIATE CONNECTION
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                <div class="space-y-1">
+                    <div class="section-tag text-[10px]">WE WORK WITH</div>
+                    <p class="text-gray-500 text-xs leading-relaxed">Institutions and enterprises building AI for African end-users</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="section-tag text-[10px]">WE DO NOT</div>
+                    <p class="text-gray-500 text-xs leading-relaxed">Build wrappers around GPT-4. Sell SaaS subscriptions. Depend on foreign cloud</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="section-tag text-[10px]">WE ARE</div>
+                    <p class="text-gray-500 text-xs leading-relaxed">Early stage. Highly technical. Selective with partnerships. Long-term focused</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t terminal-border py-8">
+        <div class="max-w-5xl mx-auto px-6 sm:px-12 flex flex-col sm:flex-row justify-between items-center text-[10px] sm:text-xs text-gray-600 gap-4">
+            <div class="tracking-wider">&copy; 2026 ADELINE SYSTEMS. ALL RIGHTS RESERVED.</div>
+            <div class="flex items-center gap-4">
+                <span class="tracking-widest text-gray-700">LOC: DXB // DEST: NBO</span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="tracking-widest text-green-900">STATUS: STEALTH</span>
+                </span>
+            </div>
+        </div>
     </footer>
 
 </body>
